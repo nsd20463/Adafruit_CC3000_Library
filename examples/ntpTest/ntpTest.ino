@@ -40,7 +40,7 @@ This example does a test of the SNTP (Simple Network Time Protocol) client:
 // Use hardware SPI for the remaining pins
 // On an UNO, SCK = 13, MISO = 12, and MOSI = 11
 Adafruit_CC3000 cc3000 = Adafruit_CC3000(ADAFRUIT_CC3000_CS, ADAFRUIT_CC3000_IRQ, ADAFRUIT_CC3000_VBAT,
-                                         SPI_CLOCK_DIV2); // you can change this clock speed but DI
+                                         SPI_CLOCK_DIVIDER); // you can change this clock speed but DI
 
 #define WLAN_SSID       "myNetwork"   // cannot be longer than 32 characters!
 #define WLAN_PASS       "myPassword"
@@ -136,10 +136,10 @@ void setup(void)
 */
   
   uint16_t firmware = checkFirmwareVersion();
-  if ((firmware != 0x113) && (firmware != 0x118)) {
+  if (firmware < 0x113) {
     Serial.println(F("Wrong firmware version!"));
     for(;;);
-  }
+  } 
   
   /* Delete any old connection data on the module */
   Serial.println(F("\nDeleting old connection profiles"));

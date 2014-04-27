@@ -39,7 +39,7 @@ It might not work on all networks!
 // Use hardware SPI for the remaining pins
 // On an UNO, SCK = 13, MISO = 12, and MOSI = 11
 Adafruit_CC3000 cc3000 = Adafruit_CC3000(ADAFRUIT_CC3000_CS, ADAFRUIT_CC3000_IRQ, ADAFRUIT_CC3000_VBAT,
-                                         SPI_CLOCK_DIV2); // you can change this clock speed
+                                         SPI_CLOCK_DIVIDER); // you can change this clock speed
 
 #define WLAN_SSID       "myNetwork"           // cannot be longer than 32 characters!
 #define WLAN_PASS       "myPassword"
@@ -82,6 +82,7 @@ void setup(void)
   // Optional SSID scan
   // listSSIDResults();
   
+  Serial.print(F("\nAttempting to connect to ")); Serial.println(WLAN_SSID);
   if (!cc3000.connectToAP(WLAN_SSID, WLAN_PASS, WLAN_SECURITY)) {
     Serial.println(F("Failed!"));
     while(1);
